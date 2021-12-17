@@ -14,6 +14,8 @@ struct LoginView: View {
     @State var email = ""
     @State var password = ""
     @State var loginStatusMessage = ""
+    @State var shouldShowImagePicker = false
+    @State var image: UIImage?
     
     var body: some View {
         NavigationView {
@@ -30,11 +32,24 @@ struct LoginView: View {
                     
                     if !isLoginMode {
                         Button {
-                            
+                            shouldShowImagePicker.toggle()
                         } label: {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 64))
-                                .padding()
+                            VStack {
+                                if let img = self.image {
+                                    Image(uiImage: img)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 80, height: 80)
+                                        .cornerRadius(80)
+                                }else {
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 64))
+                                        .padding()
+                                        .foregroundColor(Color(.label))
+                                }
+                            }
+                            .overlay(RoundedRectangle(cornerRadius: 64)
+                                        .stroke(Color(.label), lineWidth: 1))
                         }
                     }
                     
@@ -72,6 +87,9 @@ struct LoginView: View {
             .navigationTitle(isLoginMode ? "Log in" : "Create Account")
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+        }
     }
     
     private func handleAuthBtnAction() {
@@ -99,7 +117,32 @@ struct LoginView: View {
                 return
             }
             self.loginStatusMessage = "Successfully create user: \(result?.user.uid ?? "")"
+            
+            self.persistImageToStorage()
         }
+    }
+    
+    private func persistImageToStorage() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
+        guard let imageData = self.image?.jpegData(compressionQuality: 0.5) else { return }
+        ref.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                self.loginStatusMessage = "failed to save image to storage: \(err)"
+                return
+            }
+            
+            ref.downloadURL { url, err in
+                if let err = err {
+                    self.loginStatusMessage = "failed to retrieve download image url: \(err)"
+                    return
+                }
+                
+                self.loginStatusMessage = "Successfully stored image with url: \(url?.absoluteString ?? "")"
+            }
+        }
+        
+        
     }
 }
 

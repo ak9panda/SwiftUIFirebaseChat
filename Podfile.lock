@@ -1,0 +1,22 @@
+PODS:
+  - FirebaseFirestore (7.11.0)
+
+DEPENDENCIES:
+  - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `7.11.0`)
+
+EXTERNAL SOURCES:
+  FirebaseFirestore:
+    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 7.11.0
+
+CHECKOUT OPTIONS:
+  FirebaseFirestore:
+    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 7.11.0
+
+SPEC CHECKSUMS:
+  FirebaseFirestore: 783538aced1557a6b817ee121593561127a00244
+
+PODFILE CHECKSUM: 05c7c6aa9f499de8080bdee4f11f86934c716856
+
+COCOAPODS: 1.11.2
