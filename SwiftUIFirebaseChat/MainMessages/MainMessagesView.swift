@@ -6,16 +6,40 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MainMessagesView: View {
     
+    @State var shouldShowLogoutOptions = false
+    
+    @ObservedObject private var messageVM = MainMessagesViewModel()
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                customNavBar
+                messageView
+            }
+            .overlay(newMessageButton, alignment: .bottom)
+            .navigationBarHidden(true)
+        }
+    }
+    
     private var customNavBar: some View {
         HStack(spacing: 10) {
-            Image(systemName: "person.fill")
-                .font(.system(size: 32, weight: .bold))
+            
+            WebImage(url: URL(string: messageVM.chatUser?.profileImageUrl ?? ""))
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipped()
+                .cornerRadius(44)
+                .overlay(RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color(.label), lineWidth: 1))
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("USERNAME")
+                let userName = messageVM.chatUser?.email.components(separatedBy: "@").first ?? ""
+                Text(userName)
                     .font(.system(size: 24, weight: .bold))
                 HStack {
                     Circle()
@@ -90,19 +114,6 @@ struct MainMessagesView: View {
                 }
                 .padding(.horizontal)
             }
-        }
-    }
-    
-    @State var shouldShowLogoutOptions = false
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                customNavBar
-                messageView
-            }
-            .overlay(newMessageButton, alignment: .bottom)
-            .navigationBarHidden(true)
         }
     }
 }
