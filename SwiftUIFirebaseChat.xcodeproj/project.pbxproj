@@ -18,6 +18,8 @@
 		7D5F8E912768EF35003167CF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F8E902768EF35003167CF /* FirebaseManager.swift */; };
 		7D72D0792770C3A5005FB462 /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72D0782770C3A5005FB462 /* MainMessagesView.swift */; };
 		7D806CB1276A1AC70098F03C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D806CB0276A1AC70098F03C /* ImagePicker.swift */; };
+		7D967A7B277373A90051FC3A /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D967A7A277373A90051FC3A /* CreateNewMessageView.swift */; };
+		7D967A7D277376030051FC3A /* CreateNewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D967A7C277376030051FC3A /* CreateNewMessageViewModel.swift */; };
 		7DDB1F40277215FD00700407 /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB1F3F277215FD00700407 /* MainMessagesViewModel.swift */; };
 		7DDB1F442772211100700407 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB1F432772211100700407 /* ChatUser.swift */; };
 		7DDB1F472772261800700407 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7DDB1F462772261800700407 /* SDWebImageSwiftUI */; };
@@ -34,6 +36,8 @@
 		7D5F8E902768EF35003167CF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		7D72D0782770C3A5005FB462 /* MainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		7D806CB0276A1AC70098F03C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		7D967A7A277373A90051FC3A /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
+		7D967A7C277376030051FC3A /* CreateNewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewModel.swift; sourceTree = "<group>"; };
 		7DDB1F3F277215FD00700407 /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		7DDB1F432772211100700407 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		98741F62B41AC032975CFC45 /* Pods-SwiftUIFirebaseChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUIFirebaseChat.release.xcconfig"; path = "Target Support Files/Pods-SwiftUIFirebaseChat/Pods-SwiftUIFirebaseChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,10 +121,20 @@
 		7D72D0772770C36D005FB462 /* MainMessages */ = {
 			isa = PBXGroup;
 			children = (
+				7D967A79277373860051FC3A /* NewMessage */,
 				7D72D0782770C3A5005FB462 /* MainMessagesView.swift */,
 				7DDB1F3F277215FD00700407 /* MainMessagesViewModel.swift */,
 			);
 			path = MainMessages;
+			sourceTree = "<group>";
+		};
+		7D967A79277373860051FC3A /* NewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				7D967A7A277373A90051FC3A /* CreateNewMessageView.swift */,
+				7D967A7C277376030051FC3A /* CreateNewMessageViewModel.swift */,
+			);
+			path = NewMessage;
 			sourceTree = "<group>";
 		};
 		7DDB1F41277216AF00700407 /* Utils */ = {
@@ -266,9 +280,11 @@
 				7DDB1F442772211100700407 /* ChatUser.swift in Sources */,
 				7D5F8E912768EF35003167CF /* FirebaseManager.swift in Sources */,
 				7D806CB1276A1AC70098F03C /* ImagePicker.swift in Sources */,
+				7D967A7B277373A90051FC3A /* CreateNewMessageView.swift in Sources */,
 				7D5F8E7E2768C879003167CF /* LoginView.swift in Sources */,
 				7D5F8E7C2768C879003167CF /* SwiftUIFirebaseChatApp.swift in Sources */,
 				7D72D0792770C3A5005FB462 /* MainMessagesView.swift in Sources */,
+				7D967A7D277376030051FC3A /* CreateNewMessageViewModel.swift in Sources */,
 				7DDB1F40277215FD00700407 /* MainMessagesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

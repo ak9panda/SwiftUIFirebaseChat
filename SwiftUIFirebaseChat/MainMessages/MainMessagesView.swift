@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct MainMessagesView: View {
     
     @State var shouldShowLogoutOptions = false
+    @State var shouldShowNewMessageScreen = false
     
     @ObservedObject private var messageVM = MainMessagesViewModel()
     
@@ -62,16 +63,22 @@ struct MainMessagesView: View {
         .actionSheet(isPresented: $shouldShowLogoutOptions) {
             .init(title: Text("Settings"), message: Text("Logout Setting"), buttons: [
                 .destructive(Text("Sign out"), action: {
-                    print("signout actions")
+                    messageVM.handleSignOut()
                 }),
                     .cancel()
             ])
+        }
+        .fullScreenCover(isPresented: $messageVM.isCurrentlyLoggedOut, onDismiss: nil) {
+            LoginView {
+                self.messageVM.isCurrentlyLoggedOut = false
+                self.messageVM.fetchCurrentUser()
+            }
         }
     }
     
     private var newMessageButton: some View {
         Button {
-            
+            shouldShowNewMessageScreen.toggle()
         } label: {
             HStack {
                 Spacer()
@@ -85,6 +92,9 @@ struct MainMessagesView: View {
             .cornerRadius(32)
             .padding()
             .shadow(radius: 8)
+        }
+        .fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil) {
+            CreateNewMessageView()
         }
     }
     

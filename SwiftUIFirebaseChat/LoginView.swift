@@ -10,6 +10,7 @@ import Firebase
 
 struct LoginView: View {
     
+    let didCompleteLoginProcess: () -> ()
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
@@ -107,10 +108,15 @@ struct LoginView: View {
                 return
             }
             self.loginStatusMessage = "Successfully logged in a user: \(result?.user.uid ?? "")"
+            self.didCompleteLoginProcess()
         }
     }
     
     private func createNewAccount() {
+        if self.image == nil {
+            self.loginStatusMessage = "You must select an avitar image"
+            return
+        }
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
             if let err = err {
                 self.loginStatusMessage = "Failed to create user: \(err)"
@@ -159,12 +165,13 @@ struct LoginView: View {
                 }
                 
                 print("Success")
+                self.didCompleteLoginProcess()
             }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView {}
     }
 }
