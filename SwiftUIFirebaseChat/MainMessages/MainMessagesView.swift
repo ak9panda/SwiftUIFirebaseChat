@@ -12,6 +12,8 @@ struct MainMessagesView: View {
     
     @State var shouldShowLogoutOptions = false
     @State var shouldShowNewMessageScreen = false
+    @State var chatUser: ChatUser?
+    @State var shouldNavigatetoChatLogView = false
     
     @ObservedObject private var messageVM = MainMessagesViewModel()
     
@@ -20,6 +22,10 @@ struct MainMessagesView: View {
             VStack {
                 customNavBar
                 messageView
+                
+                NavigationLink("", isActive: $shouldNavigatetoChatLogView) {
+                    ChatLogView(chatUser: self.chatUser)
+                }
             }
             .overlay(newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)
@@ -94,7 +100,10 @@ struct MainMessagesView: View {
             .shadow(radius: 8)
         }
         .fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil) {
-            CreateNewMessageView()
+            CreateNewMessageView { user in
+                self.shouldNavigatetoChatLogView.toggle()
+                self.chatUser = user
+            }
         }
     }
     
@@ -102,22 +111,26 @@ struct MainMessagesView: View {
         ScrollView {
             ForEach(0..<5, id: \.self) { num in
                 VStack {
-                    HStack(spacing: 16) {
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 32))
-                            .padding(8)
-                            .overlay(RoundedRectangle(cornerRadius: 32)
-                                        .stroke(Color(.label), lineWidth: 1)
-                            )
-                        VStack(alignment: .leading) {
-                            Text("user name")
-                                .font(.system(size: 16, weight: .bold))
-                            Text("message send to user")
-                                .font(.system(size: 14, weight: .light))
+                    NavigationLink {
+                        ChatLogView(chatUser: self.chatUser)
+                    } label: {
+                        HStack(spacing: 16) {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 32))
+                                .padding(8)
+                                .overlay(RoundedRectangle(cornerRadius: 32)
+                                            .stroke(Color(.label), lineWidth: 1)
+                                )
+                            VStack(alignment: .leading) {
+                                Text("user name")
+                                    .font(.system(size: 16, weight: .bold))
+                                Text("message send to user")
+                                    .font(.system(size: 14, weight: .light))
+                            }
+                            Spacer()
+                            Text("22d")
+                                .font(.system(size: 14, weight: .semibold))
                         }
-                        Spacer()
-                        Text("22d")
-                            .font(.system(size: 14, weight: .semibold))
                     }
                     Divider()
                         .padding(.vertical, 5)

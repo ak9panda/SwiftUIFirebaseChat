@@ -10,6 +10,8 @@ import SDWebImageSwiftUI
 
 struct CreateNewMessageView: View {
     
+    let didSelectNewUser: (ChatUser) -> ()
+    
     @Environment(\.presentationMode) var presentationMode
 
     @ObservedObject var newMessageVM = CreateNewMessageViewModel()
@@ -20,7 +22,7 @@ struct CreateNewMessageView: View {
 //                Text(newMessageVM.errorMessage)
                 ForEach (newMessageVM.users) { user in
                     Button {
-
+                        didSelectNewUser(user)
                     } label: {
                         HStack(spacing: 16) {
                             WebImage(url: URL(string: user.profileImageUrl))
