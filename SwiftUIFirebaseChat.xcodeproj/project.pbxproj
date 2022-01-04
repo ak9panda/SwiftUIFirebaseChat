@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		46577F95FA6E7C78D64F4C96 /* Pods_SwiftUIFirebaseChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D5EECE99800FE128CC37994 /* Pods_SwiftUIFirebaseChat.framework */; };
+		7D1C3F5C2784529C00982B01 /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1C3F5B2784529C00982B01 /* ChatLogViewModel.swift */; };
 		7D5F8E7C2768C879003167CF /* SwiftUIFirebaseChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F8E7B2768C879003167CF /* SwiftUIFirebaseChatApp.swift */; };
 		7D5F8E7E2768C879003167CF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F8E7D2768C879003167CF /* LoginView.swift */; };
 		7D5F8E802768C879003167CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D5F8E7F2768C879003167CF /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		1D5EECE99800FE128CC37994 /* Pods_SwiftUIFirebaseChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftUIFirebaseChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D1C3F5B2784529C00982B01 /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 		7D5F8E782768C879003167CF /* SwiftUIFirebaseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIFirebaseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D5F8E7B2768C879003167CF /* SwiftUIFirebaseChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIFirebaseChatApp.swift; sourceTree = "<group>"; };
 		7D5F8E7D2768C879003167CF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				7DF1BA2D2776258600901A98 /* ChatLogView.swift */,
+				7D1C3F5B2784529C00982B01 /* ChatLogViewModel.swift */,
 			);
 			path = ChatLog;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				7DDB1F442772211100700407 /* ChatUser.swift in Sources */,
 				7DF1BA2E2776258600901A98 /* ChatLogView.swift in Sources */,
 				7D5F8E912768EF35003167CF /* FirebaseManager.swift in Sources */,
+				7D1C3F5C2784529C00982B01 /* ChatLogViewModel.swift in Sources */,
 				7D806CB1276A1AC70098F03C /* ImagePicker.swift in Sources */,
 				7D967A7B277373A90051FC3A /* CreateNewMessageView.swift in Sources */,
 				7D5F8E7E2768C879003167CF /* LoginView.swift in Sources */,
