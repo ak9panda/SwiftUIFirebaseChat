@@ -33,6 +33,7 @@ class ChatLogViewModel: ObservableObject {
     
     @Published var chatText = ""
     @Published var errorMessage = ""
+    @Published var count = 0
     @Published var chatMessages = [ChatMessage]()
     
     let chatUser: ChatUser?
@@ -64,6 +65,11 @@ class ChatLogViewModel: ObservableObject {
                     }
                 })
             }
+        
+        // for scroll down to last message in messsage view
+        DispatchQueue.main.async {
+            self.count += 1
+        }
     }
     
     func handleSend() {
@@ -84,11 +90,13 @@ class ChatLogViewModel: ObservableObject {
             }
             
             self.chatText = ""
+            // for scroll down to last message in messsage view after send a message
+            self.count += 1
         }
         
         let recipientDocument = FirebaseManager.shared.firestore.collection("messages")
-            .document(fromId)
-            .collection(toId)
+            .document(toId)
+            .collection(fromId)
             .document()
         
         recipientDocument.setData(messageData) { error in
