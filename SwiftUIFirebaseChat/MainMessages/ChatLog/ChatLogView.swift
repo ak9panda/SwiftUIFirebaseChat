@@ -11,7 +11,6 @@ struct ChatLogView: View {
     
     let chatUser: ChatUser?
     
-    
     @ObservedObject var vm: ChatLogViewModel
     
     init(chatUser: ChatUser?) {
