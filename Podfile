@@ -5,7 +5,4 @@ target 'SwiftUIFirebaseChat' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for SwiftUIFirebaseChat
-  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '7.11.0'
-
 end

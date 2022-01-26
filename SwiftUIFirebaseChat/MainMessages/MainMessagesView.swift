@@ -109,39 +109,41 @@ struct MainMessagesView: View {
     
     private var messageView: some View {
         ScrollView {
-            ForEach(messageVM.recentMessages) { recentMessage in
-                VStack {
-                    NavigationLink {
-                        ChatLogView(chatUser: self.chatUser)
-                    } label: {
-                        HStack(spacing: 16) {
-                            WebImage(url: URL(string: recentMessage.profileImageURL))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 64, height: 64)
-                                .clipped()
-                                .cornerRadius(64)
-                                .overlay(RoundedRectangle(cornerRadius: 64)
-                                            .stroke(Color.black, lineWidth: 1))
-                                .shadow(radius: 2)
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(recentMessage.email)
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(Color(.label))
-                                Text(recentMessage.text)
-                                    .font(.system(size: 14, weight: .light))
-                                    .foregroundColor(Color(.darkGray))
-                                    .multilineTextAlignment(.leading)
+            if let recentMessages = messageVM.recentMessages {
+                ForEach(recentMessages) { recentMessage in
+                    VStack {
+                        NavigationLink {
+                            ChatLogView(chatUser: self.chatUser)
+                        } label: {
+                            HStack(spacing: 16) {
+                                WebImage(url: URL(string: recentMessage.profileImageURL))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 64, height: 64)
+                                    .clipped()
+                                    .cornerRadius(64)
+                                    .overlay(RoundedRectangle(cornerRadius: 64)
+                                                .stroke(Color.black, lineWidth: 1))
+                                    .shadow(radius: 2)
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(recentMessage.email)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(Color(.label))
+                                    Text(recentMessage.text)
+                                        .font(.system(size: 14, weight: .light))
+                                        .foregroundColor(Color(.darkGray))
+                                        .multilineTextAlignment(.leading)
+                                }
+                                Spacer()
+                                Text("1d")
+                                    .font(.system(size: 14, weight: .semibold))
                             }
-                            Spacer()
-                            Text("22d")
-                                .font(.system(size: 14, weight: .semibold))
                         }
+                        Divider()
+                            .padding(.vertical, 5)
                     }
-                    Divider()
-                        .padding(.vertical, 5)
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
         }
     }
