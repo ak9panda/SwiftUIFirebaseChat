@@ -63,34 +63,41 @@ class MainMessagesViewModel: ObservableObject {
                 
                 guard let snapshot = querySnapshot else { return }
                 
-                guard let documents = (snapshot as NSObject).value(forKey: "documentChanges") as? NSArray else { return }
-                
-                documents.forEach { document in
-                    guard let object = document as? NSObject else { return }
-                    guard let docs = object.value(forKey: "document") as? NSObject else { debugPrint("document was nil"); return }
-                    guard let data = docs.value(forKey: "data") as? [String: Any] else { debugPrint("data was nil"); return }
-                    
-                    let docId = docs.value(forKey: "documentID") as? String
-                    if let index = self.recentMessages.firstIndex(where: { rm in
-                        return rm.documentId == docId
-                    }) {
-                        self.recentMessages.remove(at: index)
-                    }
-                    self.recentMessages.insert(.init(documentId: docId ?? "", data: data), at: 0)
-                }
-                
-                
-//                snapshot.documentChanges.forEach { change in
-//                    let docId = change.document.documentID
-//                    
+//                guard let documents = (snapshot as NSObject).value(forKey: "documentChanges") as? NSArray else { return }
+//
+//                documents.forEach { document in
+//                    guard let object = document as? NSObject else { return }
+//                    guard let docs = object.value(forKey: "document") as? NSObject else { debugPrint("document was nil"); return }
+//                    guard let data = docs.value(forKey: "data") as? [String: Any] else { debugPrint("data was nil"); return }
+//
+//                    let docId = docs.value(forKey: "documentID") as? String
 //                    if let index = self.recentMessages.firstIndex(where: { rm in
 //                        return rm.documentId == docId
 //                    }) {
 //                        self.recentMessages.remove(at: index)
 //                    }
-//                        
-//                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+//                    self.recentMessages.insert(.init(documentId: docId ?? "", data: data), at: 0)
 //                }
+                
+                
+                snapshot.documentChanges.forEach { change in
+                    let docId = change.document.documentID
+                    
+                    if let index = self.recentMessages.firstIndex(where: { rm in
+                        return rm.id == docId
+                    }) {
+                        self.recentMessages.remove(at: index)
+                    }
+                    
+                    do {
+                        if let rm = try change.document.data(as: RecentMessage.self) {
+                            self.recentMessages.insert(rm, at: 0)
+                        }
+                    }catch {
+                        print("error encoding")
+                    }
+//                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+                }
             }
     }
     

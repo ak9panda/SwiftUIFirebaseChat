@@ -116,7 +116,7 @@ struct MainMessagesView: View {
                             ChatLogView(chatUser: self.chatUser)
                         } label: {
                             HStack(spacing: 16) {
-                                WebImage(url: URL(string: recentMessage.profileImageURL))
+                                WebImage(url: URL(string: recentMessage.profileImageUrl))
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 64, height: 64)
@@ -129,14 +129,15 @@ struct MainMessagesView: View {
                                     Text(recentMessage.email)
                                         .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(Color(.label))
+                                        .multilineTextAlignment(.leading)
                                     Text(recentMessage.text)
                                         .font(.system(size: 14, weight: .light))
                                         .foregroundColor(Color(.darkGray))
                                         .multilineTextAlignment(.leading)
                                 }
                                 Spacer()
-                                Text("1d")
-                                    .font(.system(size: 14, weight: .semibold))
+                                Text(recentMessage.timestamp.description)
+                                    .font(.system(size: 12, weight: .semibold))
                             }
                         }
                         Divider()

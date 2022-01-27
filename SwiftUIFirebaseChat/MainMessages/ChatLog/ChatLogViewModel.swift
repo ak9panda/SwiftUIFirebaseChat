@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 
 struct FirebaseConstants {
     static let fromId = "fromId"
@@ -46,10 +47,19 @@ class ChatLogViewModel: ObservableObject {
                     return
                 }
                 
-                querySnapshot?.documentChanges.forEach({ change in
+                guard let snapshot = querySnapshot else { return }
+                
+                snapshot.documentChanges.forEach({ change in
                     if change.type == .added {
-                        let data = change.document.data()
-                        self.chatMessages.append(.init(documentId: change.document.documentID, data: data))
+                        do {
+                            if let cm = try change.document.data(as: ChatMessage.self) {
+                                self.chatMessages.append(cm)
+                            }
+                        }catch {
+                            print("Error encoding")
+                        }
+//                        let data = change.document.data()
+//                        self.chatMessages.append(.init(documentId: change.document.documentID, data: data))
                     }
                 })
             }
